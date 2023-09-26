@@ -2,8 +2,9 @@ const { keccak256 } = require('ethereum-cryptography/keccak');
 const { bytesToHex } = require('ethereum-cryptography/utils');
 
 class MerkleTree {
-  constructor(leaves) {
-    this.leaves = leaves.map(Buffer.from).map(keccak256);
+  constructor(names) {
+    // Convert names to lowercase before hashing
+    this.leaves = names.map(name => Buffer.from(name.toLowerCase())).map(keccak256);
     this.concat = (left, right) => keccak256(Buffer.concat([left, right]));
   }
 

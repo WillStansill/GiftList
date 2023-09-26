@@ -17,12 +17,12 @@ async function main() {
 
   const merkleTree = new MerkleTree(niceList.map(name => name.toLowerCase()));
   const proof = merkleTree.getProof(nameToVerify.toLowerCase());
-
+  console.log('Client: Proof:', proof);
   const requestBody = {
     name: nameToVerify,
     proof: proof,
   };
-  console.log('Client: Proof:', proof);
+ 
 
   try {
     const response = await axios.post(`${serverUrl}/gift`, requestBody);
